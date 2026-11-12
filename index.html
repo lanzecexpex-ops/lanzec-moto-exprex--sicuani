@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07111f">
+
+    <title>Inicio | LANZEC MOTO EXPRESS</title>
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #cddbf0;
+            --panel: #d8e0eb;
+            --panel2: #142942;
+            --text: #f3f7ff;
+            --muted: #a9bad0;
+            --cyan: #24d7ef;
+            --blue: #2878ff;
+            --red: #ff6577;
+            --line: #042346;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(ellipse at top, #102a48 0, #07111f 55%);
+            color: var(--text);
+            font: 16px/1.5 system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+            min-height: 100vh;
+        }
+
+        a {
+            color: var(--cyan);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px clamp(16px, 4vw, 56px);
+            border-bottom: 1px solid var(--line);
+            background: #07111fdc;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(12px);
+            z-index: 5;
+        }
+
+        .brand {
+            font-weight: 900;
+            letter-spacing: .5px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .brand span {
+            color: var(--cyan);
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .shell {
+            width: min(1120px, 94%);
+            margin: 36px auto 70px;
+        }
+
+        .hero {
+            padding: clamp(24px, 6vw, 72px) 0;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 4.8rem);
+            line-height: 1.02;
+            margin: 0 0 18px;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--cyan);
+        }
+
+        .lead {
+            font-size: 1.15rem;
+            color: var(--muted);
+            max-width: 650px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #12253b, #0c1929);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: clamp(18px, 3vw, 30px);
+            box-shadow: 0 18px 50px #0003;
+            margin: 18px 0;
+        }
+
+        .card h1,
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .grid.three {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 11px;
+            background: linear-gradient(90deg, var(--blue), #16bde3);
+            color: #fff;
+            font-weight: 800;
+            text-decoration: none;
+            padding: 12px 17px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            gap: 7px;
+        }
+
+        .btn:hover {
+            filter: brightness(1.1);
+        }
+
+        .btn:disabled {
+            opacity: .5;
+            cursor: wait;
+        }
+
+        .btn.ghost {
+            background: transparent;
+            border: 1px solid #45627f;
+            color: var(--text);
+        }
+
+        .btn.secondary {
+            background: #156b82;
+        }
+
+        .btn.danger {
+            background: #9d2d42;
+        }
+
+        .btn.small {
+            padding: 8px 11px;
+            font-size: .88rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        form {
+            display: grid;
+            gap: 14px;
+        }
+
+        label {
+            display: grid;
+            gap: 6px;
+            color: var(--muted);
+            font-weight: 650;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            background: #081626;
+            color: var(--text);
+            border: 1px solid #36506c;
+            border-radius: 10px;
+            padding: 12px;
+            font: inherit;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 2px solid #1cb9e0;
+            border-color: transparent;
+        }
+
+        input[type=radio],
+        input[type=checkbox] {
+            width: auto;
+            accent-color: var(--cyan);
+        }
+
+        .checkrow {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .checkrow label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .muted,
+        small {
+            color: var(--muted);
+        }
+
+        .notice {
+            margin: 16px auto;
+            padding: 13px 16px;
+            border-radius: 10px;
+            width: min(1120px, 94%);
+            background: #133d4b;
+            border: 1px solid #1e9bb5;
+        }
+
+        .notice.bad {
+            background: #4a1d2b;
+            border-color: #a83c55;
+        }
+
+        .notice[hidden] {
+            display: none;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 4px 9px;
+            border: 1px solid #3d6480;
+            border-radius: 99px;
+            color: var(--cyan);
+            font-size: .8rem;
+            text-transform: capitalize;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .service-card,
+        .admin-row {
+            border: 1px solid var(--line);
+            background: #0b1a2b;
+            border-radius: 14px;
+            padding: 16px;
+            margin: 12px 0;
+        }
+
+        .service-card p {
+            margin: 8px 0;
+        }
+
+        .empty {
+            border: 1px dashed #36506c;
+            border-radius: 12px;
+            padding: 22px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .stat {
+            padding: 17px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #0c1c2e;
+        }
+
+        .stat b {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--cyan);
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .admin-row {
+            display: grid;
+            gap: 10px;
+        }
+
+        .admin-row small {
+            display: block;
+            margin-top: 4px;
+        }
+
+        .details {
+            border-top: 1px solid var(--line);
+            padding-top: 10px;
+        }
+
+        .plan {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--line);
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .plan span {
+            display: grid;
+            flex: 1;
+        }
+
+        .plan strong {
+            font-size: 1.4rem;
+            color: var(--cyan);
+        }
+
+        .avatar {
+            max-width: 100px;
+            border-radius: 50%;
+            border: 2px solid var(--cyan);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+        }
+
+        .badge {
+            display: inline-block;
+            color: #06131d;
+            background: var(--cyan);
+            border-radius: 99px;
+            padding: 5px 11px;
+            font-weight: 900;
+            font-size: .8rem;
+        }
+
+        .split {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .section-title {
+            margin-top: 35px;
+        }
+
+        .note {
+            border-left: 3px solid var(--cyan);
+            padding: 8px 13px;
+            color: var(--muted);
+        }
+
+        @media(max-width:760px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .grid,
+            .grid.three {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .shell {
+                margin-top: 20px;
+            }
+
+            .actions .btn {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body data-page="home">
+
+    <header class="topbar">
+
+        <a class="brand" href="index.html">
+            LANZEC <span>MOTO EXPRESS</span>
+        </a>
+
+        <nav>
+            <a class="btn ghost small" href="index.html">Inicio</a>
+            <a class="btn ghost small" href="suscripcion.html">Suscripciones</a>
+            <a class="btn ghost small" href="reclamos.html">Reclamos</a>
+            <button class="btn danger small" data-logout>Cerrar sesión</button>
+        </nav>
+
+    </header>
+
+    <div id="notice" class="notice" hidden></div>
+
+    <main class="shell">
+
+        <section class="hero">
+
+            <div>
+
+                <span class="badge">SICUANI · PERÚ</span>
+
+                <h1>
+                    Tu viaje. Tu entrega.<br>
+                    <em>Tu confianza.</em>
+                </h1>
+
+                <p class="lead">
+                    Conecta con transportistas para taximoto y delivery.
+                    Propón tu precio, acuerda el servicio y coordina de forma sencilla.
+                </p>
+
+                <div class="actions">
+                    <a class="btn" href="registro-cliente.html">
+                        Crear cuenta de cliente
+                    </a>
+
+                    <a class="btn ghost" href="login.html">
+                        Iniciar sesión
+                    </a>
+                </div>
+
+                <p class="muted">
+                    ¿Eres transportista?
+                    <a href="registro-taxista.html">Regístrate aquí</a>.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h2>LANZEC MOTO EXPRESS</h2>
+
+                <div class="grid">
+
+                    <div class="stat">
+                        <b>01</b>
+                        <span>Solicita mototaxi</span>
+                    </div>
+
+                    <div class="stat">
+                        <b>02</b>
+                        <span>Solicita delivery</span>
+                    </div>
+
+                    <div class="stat">
+                        <b>03</b>
+                        <span>Propón tu precio</span>
+                    </div>
+
+                    <div class="stat">
+                        <b>04</b>
+                        <span>Acuerda y confirma</span>
+                    </div>
+
+                </div>
+
+                <p class="note">
+                    Los pagos de suscripción se revisan manualmente.
+                    Nunca compartas contraseñas ni códigos.
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="grid three">
+
+            <article class="card">
+                <h2>Para clientes</h2>
+
+                <p>
+                    Solicita servicios, elige forma de pago y negocia el precio.
+                </p>
+
+                <a href="registro-cliente.html">Crear cuenta →</a>
+            </article>
+
+            <article class="card">
+                <h2>Para transportistas</h2>
+
+                <p>
+                    Registra tu moto y elige mototaxi, delivery o ambos servicios.
+                </p>
+
+                <a href="registro-taxista.html">Registrarme →</a>
+            </article>
+
+            <article class="card">
+                <h2>Ayuda y reclamos</h2>
+
+                <p>
+                    Envía un reclamo desde tu cuenta para que administración lo revise.
+                </p>
+
+                <a href="reclamos.html">Ir a reclamos →</a>
+            </article>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        © 2026 LANZEC MOTO EXPRESS · Sicuani, Perú
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+    <script src="js/config.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
